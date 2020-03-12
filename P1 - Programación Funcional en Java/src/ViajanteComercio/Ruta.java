@@ -2,27 +2,41 @@ package ViajanteComercio;
 
 import java.util.ArrayList;
 
-import static ViajanteComercio.Utilidades.calcularDistanciaCiudades;
-
 public class Ruta {
     private ArrayList<Ciudad> ruta;
     private double coste;
 
-    public void addCiudad(Ciudad ciudad) {
+    public Ruta() {
+        ruta = new ArrayList<Ciudad>();
+        coste = 0;
+    }
+
+    public void addCiudad(Ciudad ciudad, Problema problema) {
         if (!ruta.isEmpty()) {
             Ciudad ciudad_anterior = ruta.get(ruta.size() - 1);
-            coste += calcularDistanciaCiudades(ciudad_anterior, ciudad);
+            coste += problema.getDistancia(ciudad_anterior, ciudad);
         }
 
         ruta.add(ciudad);
     }
 
-    public void terminarRuta() {
-        addCiudad(ruta.get(0));
+    public void terminarRuta(Problema problema) {
+        addCiudad(ruta.get(0), problema);
     }
 
-//    @Override
-//    public String toString() {
-//
-//    }
+    public double getCoste() {
+        return coste;
+    }
+
+    @Override
+    public String toString() {
+        String cadena = "Ruta: ";
+        for (Ciudad ciudad : ruta) {
+            cadena = cadena + ciudad.getLabel() + " ";
+        }
+
+        cadena = cadena + "\nCoste: " + coste + "\n";
+
+        return cadena;
+    }
 }

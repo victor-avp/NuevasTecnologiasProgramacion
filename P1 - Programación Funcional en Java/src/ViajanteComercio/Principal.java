@@ -14,5 +14,6 @@ public class Principal {
         }
 
         Ruta solucion = heuristica.calcularRutaOptima(problema);
+        System.out.println(solucion.toString());
     }
 }
