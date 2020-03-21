@@ -1,4 +1,4 @@
-package ViajanteComercio;
+package ViajanteComercio.base;
 
 import java.util.ArrayList;
 
@@ -27,6 +27,8 @@ public class Ruta {
     public double getCoste() {
         return coste;
     }
+
+    public ArrayList<Ciudad> getRuta() { return ruta; }
 
     @Override
     public String toString() {

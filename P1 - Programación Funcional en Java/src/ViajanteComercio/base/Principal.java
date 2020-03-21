@@ -1,4 +1,4 @@
-package ViajanteComercio;
+package ViajanteComercio.base;
 
 public class Principal {
     public static void main(String[] args) {
@@ -14,6 +14,10 @@ public class Principal {
         }
 
         Ruta solucion = heuristica.calcularRutaOptima(problema);
-        System.out.println(solucion.toString());
+        System.out.println("Solución Funcional: " +
+                 solucion.toString());
+
+        Ruta solucionNoFuncional = heuristica.calcularRutaOptimaNoFuncional(problema);
+        System.out.println("Solución No Funcional: " + solucionNoFuncional.toString());
     }
 }
