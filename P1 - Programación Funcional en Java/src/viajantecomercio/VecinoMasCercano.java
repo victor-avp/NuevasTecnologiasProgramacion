@@ -1,11 +1,8 @@
-package ViajanteComercio.base;
+package viajantecomercio;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.NoSuchElementException;
-import java.util.function.Function;
-import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 public class VecinoMasCercano implements HeuristicaTSP {

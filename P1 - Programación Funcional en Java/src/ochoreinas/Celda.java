@@ -1,0 +1,38 @@
+package ochoreinas;
+
+public class Celda {
+    private int fila;
+    private int columna;
+
+    public static boolean celdasEnConflicto(Celda c1, Celda c2) {
+        return c1.getFila() == c2.getFila() || c1.getColumna() == c2.getColumna()
+                || Math.abs(c1.getFila() - c2.getFila())
+                == Math.abs(c1.getColumna() - c2.getColumna());
+    }
+
+    public Celda() {
+    }
+
+    public Celda(int fila, int columna) {
+        this.fila = fila;
+        this.columna = columna;
+    }
+
+    public int getFila() {
+        return fila;
+    }
+
+    public int getColumna() {
+        return columna;
+    }
+
+    public void setFila(int fila) {
+        this.fila = fila;
+    }
+
+    public void setColumna(int columna) {
+        this.columna = columna;
+    }
+
+
+}

@@ -1,4 +1,4 @@
-package ViajanteComercio.base;
+package viajantecomercio;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import static ViajanteComercio.base.Utilidades.calcularDistanciaCiudades;
+import static viajantecomercio.Utilidades.calcularDistanciaCiudades;
 
 /**
  * Clase basica para representar un problema TSP

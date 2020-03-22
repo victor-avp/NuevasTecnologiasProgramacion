@@ -1,4 +1,4 @@
-package ViajanteComercio.base;
+package viajantecomercio;
 
 import java.util.ArrayList;
 import java.util.Collections;

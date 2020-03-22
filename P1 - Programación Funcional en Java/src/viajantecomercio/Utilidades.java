@@ -1,6 +1,4 @@
-package ViajanteComercio.base;
-
-import ViajanteComercio.base.Ciudad;
+package viajantecomercio;
 
 public class Utilidades {
     public static double calcularDistanciaCiudades(Ciudad ciudad1, Ciudad ciudad2) {
