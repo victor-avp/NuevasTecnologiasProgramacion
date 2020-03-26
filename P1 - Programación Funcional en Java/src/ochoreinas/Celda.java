@@ -10,9 +10,6 @@ public class Celda {
                 == Math.abs(c1.getColumna() - c2.getColumna());
     }
 
-    public Celda() {
-    }
-
     public Celda(int fila, int columna) {
         this.fila = fila;
         this.columna = columna;
@@ -25,14 +22,5 @@ public class Celda {
     public int getColumna() {
         return columna;
     }
-
-    public void setFila(int fila) {
-        this.fila = fila;
-    }
-
-    public void setColumna(int columna) {
-        this.columna = columna;
-    }
-
 
 }

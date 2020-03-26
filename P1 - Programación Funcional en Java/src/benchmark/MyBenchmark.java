@@ -1,5 +1,6 @@
 package benchmark;
 
+import ochoreinas.Buscador;
 import viajantecomercio.Montecarlo;
 import viajantecomercio.Problema;
 import viajantecomercio.VecinoMasCercano;
@@ -12,9 +13,10 @@ import java.util.concurrent.TimeUnit;
 
 public class MyBenchmark {
 
-    static Problema problema = new Problema("./datos/berlin52.tsp");
+    static Problema problemaTSP = new Problema("./datos/berlin52.tsp");
     static Montecarlo heuristicaAleatoria = new Montecarlo();
     static VecinoMasCercano heuristicaVecinoMasCercano = new VecinoMasCercano();
+    static Buscador buscador8Reinas = new Buscador(8);
 
     /**
      * main methods
@@ -41,7 +43,7 @@ public class MyBenchmark {
 //    @OutputTimeUnit(TimeUnit.MILLISECONDS)
 //    @BenchmarkMode(Mode.AverageTime)
 //    public void aleatoriaFuncional() {
-//        heuristicaAleatoria.calcularRutaOptima(problema);
+//        heuristicaAleatoria.calcularRutaOptima(problemaTSP);
 //    }
 //
 //    @Benchmark
@@ -51,7 +53,7 @@ public class MyBenchmark {
 //    @OutputTimeUnit(TimeUnit.MILLISECONDS)
 //    @BenchmarkMode(Mode.AverageTime)
 //    public void aleatoriaNoFuncional() {
-//        heuristicaAleatoria.calcularRutaOptimaNoFuncional(problema);
+//        heuristicaAleatoria.calcularRutaOptimaNoFuncional(problemaTSP);
 //    }
 
     @Benchmark
@@ -61,7 +63,7 @@ public class MyBenchmark {
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @BenchmarkMode(Mode.AverageTime)
     public void vmcNoFuncional() {
-        heuristicaVecinoMasCercano.calcularRutaOptimaNoFuncional(problema);
+        heuristicaVecinoMasCercano.calcularRutaOptimaNoFuncional(problemaTSP);
     }
 
     @Benchmark
@@ -71,6 +73,26 @@ public class MyBenchmark {
     @OutputTimeUnit(TimeUnit.MILLISECONDS)
     @BenchmarkMode(Mode.AverageTime)
     public void vmcFuncional() {
-        heuristicaVecinoMasCercano.calcularRutaOptima(problema);
+        heuristicaVecinoMasCercano.calcularRutaOptima(problemaTSP);
     }
+
+//    @Benchmark
+//    //@Fork(value = 1, warmups = 1)
+//    //@Warmup(iterations = 1)
+//    //@Measurement(iterations = 3)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    @BenchmarkMode(Mode.AverageTime)
+//    public void ochoReinasNoFuncional() {
+//        buscador8Reinas.resolverNoFuncional();
+//    }
+//
+//    @Benchmark
+//    //@Fork(value = 1, warmups = 1)
+//    //@Warmup(iterations = 1)
+//    //@Measurement(iterations = 3)
+//    @OutputTimeUnit(TimeUnit.MILLISECONDS)
+//    @BenchmarkMode(Mode.AverageTime)
+//    public void ochoReinasFuncional() {
+//        buscador8Reinas.resolver();
+//    }
 }

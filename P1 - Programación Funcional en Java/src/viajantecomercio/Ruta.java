@@ -7,8 +7,13 @@ public class Ruta {
     private double coste;
 
     public Ruta() {
-        ruta = new ArrayList<Ciudad>();
+        ruta = new ArrayList<>();
         coste = 0;
+    }
+
+    public Ruta(Ruta otra_ruta) {
+        ruta = new ArrayList<>(otra_ruta.ruta);
+        coste = otra_ruta.getCoste();
     }
 
     public void addCiudad(Ciudad ciudad, Problema problema) {

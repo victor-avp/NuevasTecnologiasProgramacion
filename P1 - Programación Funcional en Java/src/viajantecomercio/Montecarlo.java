@@ -43,7 +43,7 @@ public class Montecarlo implements HeuristicaTSP {
     }
 
     public Ruta calcularRutaOptima(Problema problema) {
-        ArrayList<Ciudad> ciudades = new ArrayList<Ciudad>(problema.getCiudades());
+        ArrayList<Ciudad> ciudades = new ArrayList<>(problema.getCiudades());
 
         Stream<Ruta> flujoRutas = IntStream.range(0, veces).mapToObj(i ->
         {
@@ -54,9 +54,7 @@ public class Montecarlo implements HeuristicaTSP {
             return ruta;
         });
 
-        Ruta ruta = flujoRutas.min(Comparator.comparing(Ruta::getCoste)).
+        return flujoRutas.min(Comparator.comparing(Ruta::getCoste)).
                 orElseThrow(NoSuchElementException::new);
-
-        return ruta;
     }
 }
