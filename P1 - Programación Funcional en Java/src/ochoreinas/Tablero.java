@@ -1,77 +1,112 @@
 package ochoreinas;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+/**
+ * Clase basica para representar un tablero cuadrado
+ */
 public class Tablero {
+    /**
+     * Dimensión del tablero: longitud de un lado
+     */
     private int dimension;
+
+    /**
+     * Array con las celdas ocupadas del tablero
+     */
     private ArrayList<Celda> contenido;
 
+    /**
+     * Constructor
+     *
+     * @param dimension Dimensión del tablero
+     */
     public Tablero(int dimension) {
         this.dimension = dimension;
         contenido = new ArrayList<>();
     }
 
+    /**
+     * Constructor de copia
+     *
+     * @param tablero Tablero a copiar
+     */
     public Tablero(Tablero tablero) {
         dimension = tablero.dimension;
         contenido = new ArrayList<>(tablero.contenido);
     }
 
+    /**
+     * Coloca una reina en una posición del tablero. No se comprueba si está ocupada.
+     *
+     * @param fila    Fila de la posición
+     * @param columna Columna de la posición
+     */
     public void ponerReina(int fila, int columna) {
         contenido.add(new Celda(fila, columna));
     }
 
+    /**
+     * Duelve un boolean que indica si la posición de una celda es segura,
+     * es decir, no está en conflicto con ninguna otra
+     * Se usa enfoque funcional
+     *
+     * @param celda Celda a analizar
+     * @return boolean que indica si la posición es segura
+     */
     public boolean posicionSegura(Celda celda) {
-        for (Celda celda_ocupada : contenido) {
-            if (Celda.celdasEnConflicto(celda, celda_ocupada)) {
-                return false;
-            }
-        }
-
-        return true;
+        return contenido.stream().
+                noneMatch(celda_ocupada -> Celda.celdasEnConflicto(celda, celda_ocupada));
     }
 
+    /**
+     * Duelve un boolean que indica si la posición dada está ocupada
+     *
+     * @param fila    Fila de la posición
+     * @param columna Columna de la posición
+     * @return boolean que indica si la posición está ocupada
+     */
     private boolean posicionOcupada(int fila, int columna) {
-        for (Celda celda : contenido) {
-            if (celda.getFila() == fila && celda.getColumna() == columna) {
-                return true;
-            }
-        }
-
-        return false;
+        return contenido.stream().
+                noneMatch(c -> c.getFila() == fila && c.getColumna() == columna);
     }
 
+    /**
+     * Duelve un String con tantos "-" como se indique
+     *
+     * @param longitud Número de "-"
+     * @return String con sucesión de "-"
+     */
     private String lineaHorizontal(int longitud) {
-        String cadena = "";
-        for (int i = 0; i < longitud; i++) {
-            cadena += "-";
-        }
-
-        cadena += "\n";
-
-        return cadena;
+        return IntStream.range(0, longitud).mapToObj(i -> "-").
+                collect(Collectors.joining()) + "\n";
     }
 
     @Override
     public String toString() {
 
         String cadena = "Celdas ocupadas: " + contenido.size() + "\n";
-        String borde = lineaHorizontal(2 + dimension + (dimension+1) * 2);
+        String borde = lineaHorizontal(2 + dimension + (dimension + 1) * 2);
 
         cadena += borde;
 
-        for (int fil = 0; fil < dimension; fil++) {
-            cadena += "|  ";
-            for (int col = 0; col < dimension; col++) {
-                if (posicionOcupada(fil, col)) {
-                    cadena += "R  ";
-                } else {
-                    cadena += "X  ";
-                }
-            }
-            cadena += "|\n";
-        }
+        // toString de las celdas con enfoque funcional: para cada fila, se crea
+        // un string. Dicho string, se crea generando otro string por cada columna,
+        // aplicando una función map y concatenando con los separadores correspondientes
+        cadena += IntStream.range(0, dimension).mapToObj(fil ->
+                "|  " + IntStream.range(0, dimension).mapToObj(col ->
+                        {
+                            if (posicionOcupada(fil, col))
+                                return "R";
+                            else
+                                return "X";
+                        }
+                ).collect(Collectors.joining("  "))
+        ).collect(Collectors.joining("  |\n"));
 
-        cadena += borde;
+        cadena += "  |\n" + borde;
 
         return cadena;
 
