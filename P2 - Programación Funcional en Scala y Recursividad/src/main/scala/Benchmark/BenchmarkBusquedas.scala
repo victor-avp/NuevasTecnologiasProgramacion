@@ -1,70 +1,58 @@
 package Benchmark
 
+import Ejercicios.BusquedaBinaria.busquedaBinaria
+import Ejercicios.BusquedaSaltos.busquedaSaltos
 import org.scalameter.api._
-import org.scalameter.picklers.Implicits._
 
-object BenchmarkBusquedas extends Bench[Double] {
+import scala.util.Random
 
-  /* configuration */
+object BenchmarkBusquedas extends Bench.LocalTime {
 
-  lazy val executor = SeparateJvmsExecutor(
-    new Executor.Warmer.Default,
-    Aggregator.min,
-    new Measurer.Default
-  )
-  lazy val measurer = new Measurer.Default
-  lazy val reporter = new LoggingReporter[Double]
-  lazy val persistor = Persistor.None
+  // Criterio > para int y char
+  val criterioInt = (a: Int, b: Int) => a > b
+  val criterioChar = (a: Char, b: Char) => a > b
 
-  /* inputs */
+  // Generador de tamaño de vectores contemplados
+  val sizes = Gen.range("tam")(100000, 1000000, 100000)
 
-  val sizes = Gen.range("size")(300000, 1500000, 300000)
+  // Arrays más grandes a usar de ambos tipos. Están ordenados.
+  val arrayEnteros: Array[Int] = Array.fill(1000000)(Random.nextInt(50)).sorted
+  val arrayChar: Array[Char] = Array.fill(1000000)(Random.nextPrintableChar).sorted
 
-  val ranges = for {
-    size <- sizes
-  } yield 0 until size
+  // Benchmark para array de enteros
+  performance of "Rendimiento con enteros" in {
 
-  /* tests */
-
-  performance of "Range" in {
-    measure method "map" config (
-      exec.benchRuns -> 5
-      ) in {
-      using(ranges) in {
-        r => r.map(_ + 1)
+    measure method "BusquedaBinaria" in {
+      using(sizes) in {
+        s => busquedaBinaria(arrayEnteros.take(s), arrayEnteros(s - 1), criterioInt)
       }
     }
 
-    measure method "jeje" config (
-      exec.benchRuns -> 5
-      ) in {
-      using(ranges) in {
-        r => r.map(_ + 1)
+    measure method "BusquedaSaltos" in {
+      using(sizes) in {
+        s => busquedaSaltos(arrayEnteros.take(s), arrayEnteros(s - 1), criterioInt)
       }
     }
   }
 
+  // Benchmark para array de char
+  performance of "Rendimiento con char" in {
 
-//  def criterioInt: (Int, Int) => Boolean = (a: Int, b: Int) => a > b
-//  def criterioDouble: (Double, Double) => Boolean = (a: Double, b: Double) => a > b
-//  def criterioChar: (Char, Char) => Boolean = (a: Char, b: Char) => a > b
-//
-//  val jeje: Array[Int] = Array.fill(50)(Random.nextInt(500))
-//  val jeje2 = jeje.sorted
-//  val a_buscar = jeje2(Random.nextInt(jeje2.length))
-//  println(jeje2.mkString(" "))
-//  println(busquedaBinaria(jeje2, a_buscar, criterioInt))
+    measure method "BusquedaBinaria" in {
+      using(sizes) in {
+        s => busquedaBinaria(arrayChar.take(s), arrayChar(s - 1), criterioChar)
+      }
+    }
 
-//  val sizes: Gen[Int] = Gen.range("size")(300000, 1500000, 300000)
-//  val ranges: Gen[Range] = for {
-//    size <- sizes
-//  } yield 0 until size
-//
-//  performance of "Range" in {
-//    measure method "map" in {
-//      using(ranges) in {
-//        r => r.map(_ + 1)
-//      }
-//    }
-//  }
+    measure method "BusquedaSaltos" in {
+      using(sizes) in {
+        s => busquedaSaltos(arrayChar.take(s), arrayChar(s - 1), criterioChar)
+      }
+    }
+  }
+
+  // Se obtienen tiempos medios
+  override def aggregator: Aggregator[Double] = Aggregator.average
+
+
 }
