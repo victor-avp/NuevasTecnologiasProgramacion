@@ -1,18 +1,38 @@
-package Ejercicio1
+package Ejercicios
 
+/**
+ * Punto 2: Triángulo de Pascal
+ */
 object TrianguloDePascal {
 
-  // Incluso con Long, se desbordaría para x en rango 0-100
+  /**
+   * Función recursiva que devuelve el factorial de un número
+   *
+   * @param x Número del que se quiere obtener el factorial
+   * @return Factorial de x
+   */
   def factorial(x: Int): BigInt = {
+
+    // Función tailrecursive que calcula el factorial acumulando
+    // la multiplicación de los valores hasta llegar al objetivo
     @annotation.tailrec
     def go(x: Int, acum: BigInt): BigInt = {
       if (x <= 1) acum
       else go(x - 1, acum * x)
     }
 
+    // Punto de partida: valor inicial x, acumulador a 1
     go(x, 1)
   }
 
+  /**
+   * Función que devuelve un elemento del triángulo de Pascal
+   * con ayuda de la función recursiva factorial
+   *
+   * @param fila    Fila del elememnto
+   * @param columna Columna del elemento
+   * @return Elemento correspondiente del triángulo
+   */
   def calcularValorTrianguloPascal(fila: Int, columna: Int): BigInt = {
     factorial(fila) / (factorial(columna) * factorial(fila - columna))
   }
