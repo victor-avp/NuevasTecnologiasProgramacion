@@ -14,8 +14,7 @@ object BusquedaBinaria {
    *
    * @param coleccion Array de tipo genérico ordenado
    * @param aBuscar   Valor a buscar dentro de la colección
-   * @param criterio  Criterio para comparar dos elementos del tipo dado,
-   *                  debe indicar si el primer elemento es mayor que el segundo
+   * @param criterio  Criterio de ordenación del array
    * @tparam A
    * @return Índice de la primera ocurrencia de aBuscar en coleccion. Si no hay
    *         ninguna ocurrencia, -1.
