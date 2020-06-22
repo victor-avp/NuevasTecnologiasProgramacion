@@ -7,6 +7,10 @@
       <root url="jar://$PROJECT_DIR$/lib/test-interface-1.0.jar!/" />
     </CLASSES>
     <JAVADOC />
-    <SOURCES />
+    <SOURCES>
+      <root url="jar://$PROJECT_DIR$/lib/scalacheck_2.10-1.13.2-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/scala-library-2.10.6-sources.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/test-interface-1.0-sources.jar!/" />
+    </SOURCES>
   </library>
 </component>

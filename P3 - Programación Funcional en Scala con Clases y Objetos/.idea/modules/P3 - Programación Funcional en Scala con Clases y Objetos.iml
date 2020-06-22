@@ -11,14 +11,24 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scala-lang.modules:scala-xml_2.12:1.0.6:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.scala-lang:scala-library:2.12.10:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scala-lang:scala-reflect:2.12.10:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.scala-sbt:test-interface:1.0:jar" level="project" />
-    <orderEntry type="library" name="sbt: org.scalacheck:scalacheck_2.12:1.13.4:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalactic:scalactic_2.12:3.0.5:jar" level="project" />
-    <orderEntry type="library" scope="TEST" name="sbt: org.scalatest:scalatest_2.12:3.0.5:jar" level="project" />
+    <orderEntry type="library" name="sbt: org.scala-lang:scala-library:2.12.8:jar" level="project" />
+    <orderEntry type="module-library">
+      <library name="sbt: unmanaged-jars">
+        <CLASSES>
+          <root url="jar://$MODULE_DIR$/../../lib/config-0.4.0.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/scala-actors-2.10.0-M4.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/scala-library-2.10.0-M4.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/scala-library-2.10.6.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/scala-reflect-2.10.0-M4.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/scalacheck_2.10-1.13.2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/scalatest_2.10.0-M4-1.9-2.10.0-M4-B2.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../lib/test-interface-1.0.jar!/" />
+        </CLASSES>
+        <JAVADOC />
+        <SOURCES />
+      </library>
+    </orderEntry>
+    <orderEntry type="library" name="org.scalatest:scalatest:1.3" level="project" />
     <orderEntry type="library" name="org.scalacheck:scalacheck_2.10:1.13.2" level="project" />
-    <orderEntry type="library" name="org.scalatest:scalatest_2.10.0-M4:1.9-2.10.0-M4-B2" level="project" />
   </component>
 </module>
